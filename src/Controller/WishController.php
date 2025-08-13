@@ -16,9 +16,9 @@ final class WishController extends AbstractController
     }
 
 
-    #[Route('/wish-detail', name: 'app_wish-detail')]
-    public function allWishDetail(): Response
+    #[Route('/wish/{id}', name: 'app_wish-detail', requirements:['id'=>'/d+'], defaults:['id'=>0])]
+    public function allWishDetail(int $id): Response
     {
-        return $this->render('bucket/all-wish.html.twig');
+        return $this->render('bucket/wish-detail.html.twig', ['id' => $id]);
     }
 }
