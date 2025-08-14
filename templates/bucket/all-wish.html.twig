@@ -5,7 +5,13 @@
 {% block body %}
     <h1>All Wish</h1>
     <div>
-        <a href="{{ path('app_wish-detail', { 'id': 1 }) }}">Voir détails</a>
+        <a href="{{ path('app_wish-detail') }}">Voir détails</a>
     </div>
+
+    {% for wish in wishes %}
+    <ul class="blanc">
+        <li><a href="{{ path('app_wish-detail', {'id': wish.id}) }}">{{ wish.title }}</a></li>
+    </ul>
+    {% endfor %}
 
 {% endblock %}

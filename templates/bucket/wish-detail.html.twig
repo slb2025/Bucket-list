@@ -5,4 +5,16 @@
 {% block body %}
     <h1>Details</h1>
 
+    <ul>
+        {% for wish in wishes %}
+                <li>{{ wish.id }}</li>
+                <li>{{ wish.title }}</li>
+                <li>{{ wish.description }}</li>
+                <li>{{ wish.author }}</li>
+                <li>{{ wish.isPublished }}</li>
+                <li>{{ wish.dateCreated|date('d/m/y') }}</li>
+                <li>{{ wish.dateUpdated ? wish.dateUpdated|date('d/m/y') : '' }}</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
