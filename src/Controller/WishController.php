@@ -21,8 +21,8 @@ final class WishController extends AbstractController
     }
 
 
-    #[Route('/wish/{id}', name: 'app_wish-detail', requirements:['id'=>'\d+'], defaults:['id'=>1])]
-    public function allWishDetail(int $id, WishRepository $wishRepository): Response
+    #[Route('/wish/{id}', name: 'app_wish-detail', requirements:['id'=>'\d+'], defaults:['id'=>0])]
+    public function wishDetail(int $id, WishRepository $wishRepository): Response
     {
         $wish = $wishRepository->find($id);
 

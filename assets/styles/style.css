@@ -1,16 +1,115 @@
 body {
-    background-color: #B0413E;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
 .container-global {
-    background-color: #B0413E;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.uk-navbar-container {
-    background-color: #B0413E;
+/* Header */
+header h1 {
+    margin-left: 10px;
+    font-size: 1.8rem;
+    color: #1e87f0;
 }
 
-.blanc{
-    color: white;
+.uk-navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+
+}
+
+.uk-navbar-nav li a {
+    color: #333;
+    font-weight: bold;
+    display: inline;
+
+}
+
+.uk-navbar-nav li a:hover {
+    color: #1e87f0;
+}
+
+/* Cible tous les éléments de navigation */
+nav, nav * {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Cible les éléments de liste */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+/* Cible chaque bouton ou lien */
+nav li, nav a {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px 15px;
     text-decoration: none;
+    color: black !important;
+    font-weight: bold;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #1e87f0;
+    color: white;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Headings */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1e87f0;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #1e87f0;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Utility classes */
+.blanc {
+    color: white;
 }
