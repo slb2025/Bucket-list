@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href={{ asset('images/favicon.png') }}>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.11/dist/css/uikit.min.css" />
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bienvenue !{% endblock %}</title>
+    <link rel="icon" href={{ asset('images/favicon.png') }}>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.11/dist/css/uikit.min.css" />
+    {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-    <div class="container-global">
-    <header>
-        <nav class="uk-navbar-container" uk-navbar>
-                <ul class="uk-navbar-nav">
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
 
-                        <li><img src="{{ asset('images/logo.png') }}"></li>
-                        <li><h1>Bucket-list</h1></li>
+<header>
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <div class="logo-container">
+            <a href="{{ path('app_main') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo du site" class="site-logo">
+            </a>
+            <a href="{{ path('app_main') }}" class="site-title-link">
+                <h1 class="site-title">A vos souhaits !</h1>
+            </a>
+        </div>
 
+        <ul class="uk-navbar-nav">
+            <li><a href="{{ path('app_main') }}">Accueil</a></li>
+            <li><a href="{{ path('app_wish') }}">Liste des souhaits</a></li>
+            <li><a href="{{ path('app_create') }}">Nouveau souhait</a></li>
+            <li><a href="{{ path('app_about') }}">A propos</a></li>
+        </ul>
+    </nav>
+</header>
 
-                        <li><a href="{{ path('app_main') }}">Accueil</a></li>
-                        <li><a href="{{ path('app_wish') }}">All wish</a></li>
-                        <li><a href="{{ path('app_about') }}">About us</a></li>
+<div class="container-global">
+    {% block body %}
 
-                </ul>
-        </nav>
-    </header>
-    </div>
+    {% endblock %}
+</div>
 
-        {% block body %}
+<footer>
+    <p class="blanc">@AVosSouhaits - {{ "now"|date("Y") }}</p>
+</footer>
 
-        {% endblock %}
-    <div class="container-global">
-    <footer>
-        <p class="blanc">@Bucket-List - {{ "now"|date("Y") }}</p>
-    </footer>
-    </div>
-    </body>
+</body>
 </html>

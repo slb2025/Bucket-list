@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All Wish{% endblock %}
+{% block title %}Tous les souhaits{% endblock %}
 
 {% block body %}
     <div class="container-global">
-        <h1>All Wish</h1>
+        <h1>Tous les souhaits</h1>
 
-        {% for wish in wishes %}
-            <ul class="blanc">
-                <li><a href="{{ path('app_wish-detail', {'id': wish.id}) }}">{{ wish.title }}</a></li>
-            </ul>
-        {% endfor %}
+        <ul class="wish-list">
+            {% for wish in wishes %}
+                <ul class="blanc">
+                    <li><a href="{{ path('app_wish-detail', {'id': wish.id}) }}">{{ wish.title }}</a></li>
+                </ul>
+            {% endfor %}
+        </ul>
     </div>
 
 

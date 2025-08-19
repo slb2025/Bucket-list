@@ -1,11 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bucket-list{% endblock %}
+{% block title %}Accueil - Votre liste de souhaits{% endblock %}
 
 {% block body %}
     <div class="container-global">
-        <h1>Accueil</h1>
+        <header class="hero-section text-center">
+            <h1>Vos rêves, notre plan.</h1>
+            <p class="subtitle">Transformez vos aspirations en une liste concrète d'aventures à vivre.</p>
+        </header>
+
+        <hr>
+
+        <section class="what-is-it my-5">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <div>
+                        <h2>Qu'est-ce qu'une liste de souhaits ?</h2>
+                        <p>
+                            C'est une liste de toutes les choses que vous voulez faire, voir ou expérimenter au cours de votre vie. C'est votre feuille de route personnelle vers l'épanouissement et l'aventure. Que vous rêviez de voyager autour du monde, d'apprendre à jouer d'un instrument, ou de courir un marathon, chaque souhait est une étape vers la vie que vous souhaitez vraiment.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="{{ asset('DreamBig.webp') }}" alt="Une main écrit 'Dream Big' sur un carnet avec un arrière-plan flou d'un voyage." class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="our-mission my-5 text-center">
+            <h2>Prêt à commencer ?</h2>
+            <p>
+                Ne laissez pas vos rêves s'envoler. Créez votre première liste dès aujourd'hui et commencez à transformer vos "un jour, je ferai..." en une réalité.
+            </p>
+            <a href="{{ path('app_wish') }}" class="btn btn-primary btn-lg mt-3">Explorer les souhaits</a>
+        </section>
     </div>
-
-
 {% endblock %}

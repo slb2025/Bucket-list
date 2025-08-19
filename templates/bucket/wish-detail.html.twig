@@ -1,25 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All Wish{% endblock %}
+{% block title %}Détails du souhait{% endblock %}
 
 {% block body %}
 
     <div class="container-global">
-        <h1>Details</h1>
-        <ul>
-            <li>{{ wish.title }}</li>
-            <li>{{ wish.description }}</li>
-            <li>{{ wish.author }}</li>
-            {% if wish.isPublished is not null %}
-                <li>{{ wish.isPublished ? 'fait' : 'A faire' }}</li>
-            {% endif %}
-            <li>{{ wish.dateCreated|date('d/m/y') }}</li>
-            {% if wish.dateUpdated is not null %}
-                <li>{{ wish.dateUpdated ? wish.dateUpdated|date('d/m/y') : '' }}</li>
-            {% endif %}
-        </ul>
+        <h1>Détails du souhait : {{ wish.title }}</h1>
+        <hr>
+        <dl>
+            <dt>Titre :</dt>
+            <dd>{{ wish.title }}</dd>
 
-        <p><a href="{{ path('app_wish') }}">Retour</a></p>
+            <dt>Description :</dt>
+            <dd>{{ wish.description }}</dd>
+
+            <dt>Auteur :</dt>
+            <dd>{{ wish.author }}</dd>
+
+            {% if wish.isPublished is not null %}
+                <dt>Statut :</dt>
+                <dd>{{ wish.isPublished ? 'Fait' : 'À faire' }}</dd>
+            {% endif %}
+
+            <dt>Date de création :</dt>
+            <dd>{{ wish.dateCreated|date('d/m/Y') }}</dd>
+
+            {% if wish.dateUpdated is not null %}
+                <dt>Date de mise à jour :</dt>
+                <dd>{{ wish.dateUpdated|date('d/m/Y') }}</dd>
+            {% endif %}
+        </dl>
+
+        <p><a href="{{ path('app_wish') }}">Retour à la liste des souhaits</a></p>
 
     </div>
 
