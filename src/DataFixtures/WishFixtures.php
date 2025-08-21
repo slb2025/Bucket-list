@@ -4,11 +4,14 @@ namespace App\DataFixtures;
 
 use App\Entity\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Category; // Assurez-vous d'importer la classe Category si elle n'est pas déjà là
 
-class WishFixtures extends Fixture
+class WishFixtures extends Fixture implements DependentFixtureInterface
 {
     // Définition de la liste de 100 souhaits classifiés
+    // Les clés de ce tableau DOIVENT correspondre EXACTEMENT aux noms des catégories dans CategoryFixtures::CATEGORIES_DATA
     const WISH_LIST = [
         'Voyages et Aventures' => [
             ['title' => 'Visiter les 7 merveilles du monde', 'description' => 'Découvrir les sites les plus emblématiques de la planète, de la Grande Muraille au Taj Mahal.'],
@@ -130,22 +133,44 @@ class WishFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $authorName = "Utilisateur Anonyme"; // Un auteur par défaut
+        $authorName = "Utilisateur Anonyme";
 
-        foreach (self::WISH_LIST as $category => $wishesInCategory) {
+        // IMPORTANT : Supprimez ou commentez la ligne ci-dessous.
+        // Les méthodes hasReference et getReference sont directement disponibles.
+        // $referenceRepository = $this->container->get('doctrine.fixtures.orm.manager');
+
+        foreach (self::WISH_LIST as $categoryNameFromList => $wishesInCategory) {
+            $categoryRefName = 'category_' . strtolower(str_replace([' ', '&'], ['_', 'and'], $categoryNameFromList));
+
+            // Utilisez directement $this->hasReference()
+            if (!$this->hasReference($categoryRefName, Category::class)) {
+                throw new \RuntimeException("La catégorie de référence '{$categoryRefName}' n'a pas été trouvée. Assurez-vous que les noms dans WISH_LIST correspondent aux catégories de CategoryFixtures.");
+            }
+
+            // Utilisez directement $this->getReference()
+            $categoryEntity = $this->getReference($categoryRefName, Category::class);
+
             foreach ($wishesInCategory as $wishData) {
                 $wish = new Wish();
                 $wish->setTitle($wishData['title']);
                 $wish->setDescription($wishData['description']);
-                $wish->setAuthor($authorName); // Utilisez un auteur par défaut
-                $wish->setIsPublished(true); // Tous les souhaits sont publiés par défaut
-                $wish->setDateCreated(new \DateTime()); // Date de création actuelle
-                $wish->setDateUpdated(new \DateTime()); // Date de mise à jour actuelle
+                $wish->setAuthor($authorName);
+                $wish->setIsPublished(true);
+                $wish->setDateCreated(new \DateTime());
+                $wish->setDateUpdated(new \DateTime());
+                $wish->setCategory($categoryEntity);
 
                 $manager->persist($wish);
             }
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            CategoryFixtures::class,
+        ];
     }
 }
